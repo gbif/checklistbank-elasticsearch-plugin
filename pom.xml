@@ -19,7 +19,7 @@
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
-    <elasticsearch.assembly.descriptor>${basedir}/src/main/assemblies/plugin.xml</elasticsearch.assembly.descriptor>
+    <elasticsearch.assembly.descriptor>${project.basedir}/src/main/assemblies/plugin.xml</elasticsearch.assembly.descriptor>
 
     <checklistbank.version>2.100-SNAPSHOT</checklistbank.version>
     <elasticsearch.version>8.1.0</elasticsearch.version>
