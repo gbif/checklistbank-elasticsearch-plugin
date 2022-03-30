@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.gbif.checklistbank</groupId>
-  <artifactId>checklistbank-elasticsearch-plugins</artifactId>
+  <artifactId>checklistbank-elasticsearch-plugin</artifactId>
   <packaging>jar</packaging>
   <version>2.100-SNAPSHOT</version>
 
@@ -22,7 +22,7 @@
     <elasticsearch.assembly.descriptor>${project.basedir}/src/main/assemblies/plugin.xml</elasticsearch.assembly.descriptor>
 
     <checklistbank.version>2.100-SNAPSHOT</checklistbank.version>
-    <elasticsearch.version>8.1.0</elasticsearch.version>
+    <elasticsearch.version>8.1.1</elasticsearch.version>
     <lucene.version>9.0.0</lucene.version>
     <guava.version>18.0</guava.version>
 
