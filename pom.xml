@@ -4,7 +4,7 @@
   <groupId>org.gbif.checklistbank</groupId>
   <artifactId>checklistbank-elasticsearch-plugin</artifactId>
   <packaging>jar</packaging>
-  <version>2.103-SNAPSHOT</version>
+  <version>2.104-SNAPSHOT</version>
 
   <name>ChecklistBank Elasticsearch Plugins</name>
   <description>Elasticsearch Checklistbank plugin for indexing and searching scientific names</description>
