@@ -28,6 +28,7 @@ public class ScientificNameSoundAlikeFilter extends TokenFilter {
 
   /**
    * Construct a token stream filtering the given input.
+   * @param input token stream
    */
   public ScientificNameSoundAlikeFilter(TokenStream input) {
     super(input);
@@ -154,6 +155,12 @@ public class ScientificNameSoundAlikeFilter extends TokenFilter {
     return true;
   }
 
+  /**
+   * Handles a single word.
+   * @param str2 string to parse
+   * @param isSpecies is an species name
+   * @return a parsed string
+   */
   public static String treatWord(String str2, boolean isSpecies) {
     char startLetter;
 

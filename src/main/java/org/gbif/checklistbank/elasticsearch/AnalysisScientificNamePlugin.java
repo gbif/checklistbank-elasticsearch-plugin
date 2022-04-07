@@ -22,6 +22,9 @@ import org.elasticsearch.plugins.AnalysisPlugin;
 import org.elasticsearch.plugins.MapperPlugin;
 import org.elasticsearch.plugins.Plugin;
 
+/**
+ * Elasticsearch analyzer plugin for scientific names.
+ */
 public class AnalysisScientificNamePlugin extends Plugin implements AnalysisPlugin, MapperPlugin {
 
   @Override

@@ -24,14 +24,17 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 /**
- *
+ * Utility class for Lucene fucntions.
  */
 public class LuceneUtils {
 
   private LuceneUtils() {}
 
+  /**
+   * Tokenized and analyze an input String.
+   */
   public static List<String> analyzeString(Analyzer analyzer, String string) {
-    List<String> result = new ArrayList<String>();
+    List<String> result = new ArrayList<>();
     try (TokenStream stream  = analyzer.tokenStream(null, new StringReader(string))){
       stream.reset();
       while (stream.incrementToken()) {

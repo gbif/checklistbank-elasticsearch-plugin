@@ -19,21 +19,24 @@ import org.apache.lucene.analysis.core.KeywordTokenizer;
 import org.apache.lucene.analysis.core.LowerCaseFilter;
 
 /**
- * Keyword analyzer that uses the scientific name normalizer
+ * Keyword analyzer that uses the scientific name normalizer.
  */
 public class ScientificNameAnalyzer extends Analyzer {
 
+  /**
+   * Default tokenizer buffer size.
+   */
   public static final int BUFFER_SIZE = 1024;
 
+  /**
+   * Default constructor.
+   */
   public ScientificNameAnalyzer() {
   }
 
   @Override
   protected TokenStreamComponents createComponents(final String fieldName) {
     KeywordTokenizer source = new KeywordTokenizer(BUFFER_SIZE);
-
-    //TokenStream result = new ASCIIFoldingFilter(source);
-    //result = new ScientificNameSoundAlikeFilter(result);
 
     TokenStream result = new ScientificNameNormalizerFilter(source, true, true);
     result = new LowerCaseFilter(result);

@@ -22,14 +22,33 @@ import org.elasticsearch.index.IndexSettings;
 import org.elasticsearch.index.analysis.AbstractTokenFilterFactory;
 import org.elasticsearch.index.analysis.NormalizingTokenFilterFactory;
 
+/**
+ * Scientific name token filter factory.
+ */
 public class ScientificNameNormalizerTokenFilterFactory extends AbstractTokenFilterFactory implements
   NormalizingTokenFilterFactory {
 
+  /**
+   * Tokens name parameter name.
+   */
   public static final String FULL_NAME_TOKENS_PARAM = "fullNameTokens";
+
+  /**
+   * Stemming parameter name.
+   */
   public static final String STEMMING_PARAM = "stemming";
+
   private final boolean fullNameTokens;
   private final boolean stemming;
 
+  /**
+   * Default/Full constructor.
+   *
+   * @param indexSettings elasticsearch index settings
+   * @param environment elastic search environment
+   * @param name normalizer name
+   * @param settings normalizer settings
+   */
   public ScientificNameNormalizerTokenFilterFactory(
     IndexSettings indexSettings, Environment environment, String name, Settings settings
   ) {
