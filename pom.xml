@@ -4,7 +4,7 @@
   <groupId>org.gbif.checklistbank</groupId>
   <artifactId>checklistbank-elasticsearch-plugin</artifactId>
   <packaging>jar</packaging>
-  <version>2.101-SNAPSHOT</version>
+  <version>2.100-SNAPSHOT</version>
 
   <name>ChecklistBank Elasticsearch Plugins</name>
   <description>Elasticsearch Checklistbank plugin for indexing and searching scientific names</description>
@@ -12,11 +12,11 @@
   <distributionManagement>
     <repository>
       <id>gbif-release</id>
-      <url>dav:http://repository.gbif.org/content/repositories/releases</url>
+      <url>http://repository.gbif.org/content/repositories/releases</url>
     </repository>
     <snapshotRepository>
       <id>gbif-snapshot</id>
-      <url>dav:http://repository.gbif.org/content/repositories/snapshots</url>
+      <url>http://repository.gbif.org/content/repositories/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
 
