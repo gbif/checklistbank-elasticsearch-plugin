@@ -4,7 +4,7 @@
   <groupId>org.gbif.checklistbank</groupId>
   <artifactId>checklistbank-elasticsearch-plugin</artifactId>
   <packaging>jar</packaging>
-  <version>2.101-SNAPSHOT</version>
+  <version>2.100-SNAPSHOT</version>
 
   <name>ChecklistBank Elasticsearch Plugins</name>
   <description>Elasticsearch Checklistbank plugin for indexing and searching scientific names</description>
@@ -16,11 +16,11 @@
     </site>
     <repository>
       <id>gbif-release</id>
-      <url>http://repository.gbif.org/content/repositories/releases</url>
+      <url>dav:http://repository.gbif.org/content/repositories/releases</url>
     </repository>
     <snapshotRepository>
       <id>gbif-snapshot</id>
-      <url>http://repository.gbif.org/content/repositories/snapshots</url>
+      <url>dav:http://repository.gbif.org/content/repositories/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
 
@@ -28,7 +28,7 @@
     <connection>scm:git:git@github.com:gbif/checklistbank-elasticsearch-plugin.git</connection>
     <url>https://github.com/gbif/checklistbank-elasticsearch-plugin</url>
     <developerConnection>scm:git:git@github.com:gbif/checklistbank-elasticsearch-plugin.git</developerConnection>
-    <tag>checklistbank-elasticsearch-plugin-2.100</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <licenses>
@@ -84,9 +84,17 @@
     <maven-javadoc-plugin.version>3.3.2</maven-javadoc-plugin.version>
     <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
     <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
+    <wagon-webdav-jackrabbit.version>3.5.1</wagon-webdav-jackrabbit.version>
   </properties>
 
   <build>
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-webdav-jackrabbit</artifactId>
+        <version>${wagon-webdav-jackrabbit.version}</version>
+      </extension>
+    </extensions>
     <resources>
       <resource>
         <directory>src/main/resources</directory>
@@ -149,6 +157,21 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>${maven-javadoc-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-scm-publish-plugin</artifactId>
+        <version>${maven-scm-publish-plugin.version}</version>
+        <configuration>
+          <checkoutDirectory>${project.build.directory}/scmpublish</checkoutDirectory>
+          <checkinComment>Publishing Site Docs for ${project.artifactId}:${project.version}
+          </checkinComment>
+          <skipDeletedFiles>false</skipDeletedFiles>
+          <!-- publish to same git repo as code, just use a different branch -->
+          <pubScmUrl>${project.scm.connection}</pubScmUrl>
+          <!-- This is the git branch that the web "pages" are located in -->
+          <scmBranch>gh-pages</scmBranch>
+        </configuration>
       </plugin>
     </plugins>
   </build>
