@@ -34,14 +34,22 @@ pipeline {
         }
       }
       steps {
+        script {
+          env.JAVA_HOME = tool(name: 'OpenJDK22', type: 'jdk')
+        }
+        withEnv(["PATH+JAVA=${env.JAVA_HOME}/bin"]) {
         withMaven(
             globalMavenSettingsConfig: 'org.jenkinsci.plugins.configfiles.maven.GlobalMavenSettingsConfig1387378707709',
             mavenSettingsConfig: 'org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig1396361652540',
             traceability: true) {
                 sh '''
+                   echo "JAVA_HOME=$JAVA_HOME"
+                   java -version
+                   mvn -version
                    mvn -B -U clean package dependency:analyze
                   '''
               }
+        }
       }
     }
     stage('Snapshot to nexus') {
@@ -54,12 +62,19 @@ pipeline {
             }
         }
         steps {
+            script {
+              env.JAVA_HOME = tool(name: 'OpenJDK22', type: 'jdk')
+            }
+            withEnv(["PATH+JAVA=${env.JAVA_HOME}/bin"]) {
             withMaven (
+                jdk: 'OpenJDK22',
+                maven: 'Maven 3.9.9',
                 globalMavenSettingsConfig: 'org.jenkinsci.plugins.configfiles.maven.GlobalMavenSettingsConfig1387378707709',
                 mavenSettingsConfig: 'org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig1396361652540',
                 traceability: true){
                     sh 'mvn -B -DskipTests deploy'
                 }
+            }
         }
     }
     stage('Maven release') {
@@ -73,7 +88,13 @@ pipeline {
           RELEASE_ARGS = utils.createReleaseArgs(params.RELEASE_VERSION, params.DEVELOPMENT_VERSION, params.DRY_RUN_RELEASE)
       }
       steps {
+          script {
+            env.JAVA_HOME = tool(name: 'OpenJDK22', type: 'jdk')
+          }
+          withEnv(["PATH+JAVA=${env.JAVA_HOME}/bin"]) {
           withMaven(
+            jdk: 'OpenJDK22',
+            maven: 'Maven 3.9.9',
             globalMavenSettingsConfig: 'org.jenkinsci.plugins.configfiles.maven.GlobalMavenSettingsConfig1387378707709',
             mavenSettingsConfig: 'org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig1396361652540',
             traceability: true) {
@@ -82,6 +103,7 @@ pipeline {
                 mvn -B -Dresume=false release:prepare release:perform $RELEASE_ARGS
                 '''
             }
+          }
       }
     }
   }
