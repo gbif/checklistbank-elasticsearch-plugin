@@ -52,7 +52,7 @@ public class ScientificNameNormalizerTokenFilterFactory extends AbstractTokenFil
   public ScientificNameNormalizerTokenFilterFactory(
     IndexSettings indexSettings, Environment environment, String name, Settings settings
   ) {
-    super(name, settings);
+    super(name);
     fullNameTokens = settings.getAsBoolean(FULL_NAME_TOKENS_PARAM, false);
     stemming = settings.getAsBoolean(STEMMING_PARAM, true);
   }

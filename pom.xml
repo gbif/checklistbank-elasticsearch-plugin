@@ -59,27 +59,27 @@
   </repositories>
 
   <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
+    <java.version>21</java.version>
+    <maven.compiler.release>${java.version}</maven.compiler.release>
     <elasticsearch.assembly.descriptor>${project.basedir}/src/main/assemblies/plugin.xml</elasticsearch.assembly.descriptor>
 
-    <checklistbank.version>2.100</checklistbank.version>
-    <elasticsearch.version>8.15.4</elasticsearch.version>
-    <lucene.version>9.11.1</lucene.version>
-    <guava.version>18.0</guava.version>
+    <checklistbank.version>3.0.11-SNAPSHOT</checklistbank.version>
+    <elasticsearch.version>9.3.1</elasticsearch.version>
+    <lucene.version>10.2.1</lucene.version>
+    <guava.version>32.1.2-jre</guava.version>
 
     <!-- Test -->
-    <junit.jupiter.vesion>5.6.3</junit.jupiter.vesion>
-    <testcontainers-elasticsearch.version>1.15.0</testcontainers-elasticsearch.version>
+    <junit.jupiter.vesion>5.12.2</junit.jupiter.vesion>
+    <testcontainers-elasticsearch.version>2.0.2</testcontainers-elasticsearch.version>
 
     <!-- Plugins -->
-    <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+    <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
     <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
-    <maven-site-plugin.version>3.11.0</maven-site-plugin.version>
-    <maven-scm-publish-plugin.version>3.1.0</maven-scm-publish-plugin.version>
+    <maven-site-plugin.version>3.12.1</maven-site-plugin.version>
+    <maven-scm-publish-plugin.version>3.2.1</maven-scm-publish-plugin.version>
     <maven-javadoc-plugin.version>3.3.2</maven-javadoc-plugin.version>
-    <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-    <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
+    <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
+    <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
     <wagon-webdav-jackrabbit.version>3.5.1</wagon-webdav-jackrabbit.version>
   </properties>
 
@@ -121,11 +121,31 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <release>${maven.compiler.release}</release>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
         <version>${maven-enforcer-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>enforce-java-version</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireJavaVersion>
+                  <version>[${java.version},)</version>
+                  <message>This project requires Java ${java.version}+ (set JAVA_HOME accordingly before running Maven).</message>
+                </requireJavaVersion>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
