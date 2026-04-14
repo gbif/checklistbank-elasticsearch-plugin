@@ -67,7 +67,7 @@
     <maven.compiler.release>${java.version}</maven.compiler.release>
     <elasticsearch.assembly.descriptor>${project.basedir}/src/main/assemblies/plugin.xml</elasticsearch.assembly.descriptor>
 
-    <checklistbank.version>3.0.11-SNAPSHOT</checklistbank.version>
+    <checklistbank.version>3.0.11</checklistbank.version>
     <elasticsearch.version>9.3.1</elasticsearch.version>
     <lucene.version>10.2.1</lucene.version>
     <guava.version>32.1.2-jre</guava.version>
